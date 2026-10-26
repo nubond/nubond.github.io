@@ -1,0 +1,28 @@
+<article class="doc">
+    <h1>Lifecycle hooks</h1>
+    <p class="lead">Implement any of these methods on a container or component; nuBond calls them. Watch the console below the result.</p>
+
+    <live-example nb-in:name="@lifecycle/hooks" nb-in:open="@clock.ts"></live-example>
+
+    <div class="table">
+        <table>
+            <thead><tr><th>Hook</th><th>Called</th></tr></thead>
+            <tbody>
+                <tr><td><code>constructor</code></td><td>When the entity is created — on first show, if its element starts hidden.</td></tr>
+                <tr><td><code>onInputsRefreshDone()</code></td><td>After <code>nb-in</code> inputs changed.</td></tr>
+                <tr><td><code>onDetectChangesDone()</code></td><td>After each pass of its template.</td></tr>
+                <tr><td><code>onDispose()</code></td><td>Before it is destroyed — clear timers, unsubscribe here.</td></tr>
+                <tr><td><code>onContainerAttached(ctx)</code></td><td>A container <em>in this template</em> was attached; <code>ctx</code> is the child's instance.</td></tr>
+                <tr><td><code>onContainerDetached(ctx)</code></td><td>A container in this template was removed.</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p>
+        <code>nb-container</code> takes an expression, so the rendered container can change at runtime; an empty name removes it.
+        Hiding with <code>nb-if</code> does <em>not</em> dispose — the instance is kept.
+    </p>
+    <doc-note>
+        <p nb-projection><code>onContainerAttached</code> is about child containers only: a context is never told about its own attachment,
+        and components never raise it.</p>
+    </doc-note>
+</article>

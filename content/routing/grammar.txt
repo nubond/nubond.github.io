@@ -1,0 +1,8 @@
+'/#[page=home]/{user}/edit/{tab=info}'
+
+/            the route always starts with a slash
+#            hash mode: #/home — leave it out for path mode: /home
+[page=home]  container slot, default 'home'      → nb-container="%page"
+{user}       variable slot, no default           → router.state.user
+edit         a constant segment, written when the slot before it has a value
+{tab=info}   variable slot with a default

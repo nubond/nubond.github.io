@@ -1,0 +1,14 @@
+<style>.done { text-decoration: line-through; opacity: .6; }</style>
+
+<form nb-event:submit="event.preventDefault(), this.add(nativeElement.elements.title)">
+    <input name="title" placeholder="New todo"> <button>Add</button>
+</form>
+
+<ul>
+    <li nb-repeat="this.todos">
+        <input type="checkbox" nb-prop:checked="item.done" nb-event:change="item.done = nativeElement.checked">
+        <span nb-class="{done: item.done}">{{ index + 1 }} of {{ count }}: {{ item.title }}</span>
+        <button nb-event:click="this.todos.splice(index, 1)">✕</button>
+    </li>
+</ul>
+<p>{{ this.left }} left</p>

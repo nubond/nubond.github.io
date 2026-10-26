@@ -1,0 +1,41 @@
+<section class="example" nb-class="{modified: this.modified}">
+    <header class="bar">
+        <div class="tabs" role="tablist" nb-attr:aria-label="this.name">
+            <button class="tab" role="tab" nb-repeat="this.files"
+                    nb-class="{active: index === this.active}"
+                    nb-attr:aria-selected="index === this.active ? 'true' : 'false'"
+                    nb-event:click="this.select(index)">{{ item.name }}</button>
+        </div>
+        <div class="actions">
+            <span class="status" nb-if="this.status" role="status">{{ this.status }}</span>
+            <button class="button" nb-if="this.modified" nb-event:click="this.reset()"
+                    nb-aspect:tooltip="@Restore the original code">
+                <span class="icon" nb-template="@icon-reset"></span>
+            </button>
+            <button class="button" nb-event:click="this.copy()"
+                    nb-aspect:tooltip="this.copied ? 'Copied' : 'Copy ' + this.activeFile?.name">
+                <span class="icon" nb-if="!this.copied" nb-template="@icon-copy"></span>
+                <span class="icon" nb-if="this.copied" nb-template="@icon-check"></span>
+            </button>
+            <button class="button primary" nb-event:click="this.run()"
+                    nb-aspect:tooltip="@Run again (Ctrl+Enter)">
+                <span class="icon" nb-template="@icon-play"></span> Run
+            </button>
+        </div>
+    </header>
+    <div class="panes">
+        <code-editor class="editor"
+                     nb-in:code="this.activeFile?.code"
+                     nb-in:lang="this.activeFile?.lang"
+                     nb-in:name="this.activeFile?.name"
+                     nb-event:code-change="this.edit(data)"
+                     nb-event:run="this.run()"></code-editor>
+        <div class="output">
+            <div class="label">Result <span nb-if="this.modified" class="badge">edited</span></div>
+            <div class="preview" nb-style="height: this.height + 'px'" nb-bound="this.attachPreview(nativeElement)"></div>
+            <div class="console" nb-if="this.lines.length > 0" role="log">
+                <div class="line" nb-repeat="this.lines" nb-class="item.level">{{ item.text }}</div>
+            </div>
+        </div>
+    </div>
+</section>

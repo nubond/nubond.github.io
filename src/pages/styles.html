@@ -1,0 +1,21 @@
+<article class="doc">
+    <h1>Styles &amp; adopted styles</h1>
+    <p class="lead">A component's CSS stays inside the component. To share CSS between components, register it once as an adopted style.</p>
+
+    <live-example nb-in:name="@styles/scoped-and-shared"></live-example>
+
+    <ul>
+        <li><code>@Component(html, css)</code> — the component's own CSS. <code>:host</code> is the element, <code>:host([kind=warn])</code> the element with that attribute.</li>
+        <li><code>$AdoptedStyle('shared', css)</code> registers a <code>CSSStyleSheet</code> once; components list the names they need: <code>@Component(html, css, ['shared'])</code>. Aspects can list them too.</li>
+        <li>Register it in the array of an <code>@AppRoot</code>, <code>@Container</code>, <code>@Component</code> or <code>@Aspect</code>. <code>$AdoptedStyle</code> returns the name,
+            so in a component or aspect it registers and adopts at once: <code>@Component(html, css, [$AdoptedStyle('shared', sharedCss), 'theme'])</code>.
+            Register each name only once and refer to it by name elsewhere. Names are resolved when the component or aspect is first built,
+            so it does not matter which decorator registers the style.</li>
+        <li>CSS custom properties pass the shadow boundary — the simplest way to theme components from outside.</li>
+        <li>Containers have no Shadow DOM: page CSS styles them, and they need no adopted styles.</li>
+    </ul>
+    <doc-note>
+        <p nb-projection>The arguments after the template are recognized by their type, not their position: a string is the CSS, an array the
+        adopted style names, an object the config, a class a dependency.</p>
+    </doc-note>
+</article>

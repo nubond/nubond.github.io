@@ -1,0 +1,9 @@
+<div nb-container="@Card">
+    <span nb-projection="@title">A projected title</span>
+    <!-- projected markup is bound by the card: `this` is the Card -->
+    <p nb-projection>Liked {{ this.likes }} times</p>
+    <button nb-projection="@footer" nb-event:click="this.like()">👍 Like</button>
+</div>
+
+<!-- nothing projected: every slot keeps its own content -->
+<div nb-container="@Card"></div>

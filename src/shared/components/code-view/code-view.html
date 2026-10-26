@@ -1,0 +1,9 @@
+<figure class="view">
+    <figcaption nb-if="this.caption">{{ this.caption }}</figcaption>
+    <pre class="code"><code nb-html="highlight(this.source?.code?.trimEnd(), this.source?.lang)"></code></pre>
+    <button class="button copy" nb-event:click="this.copy()"
+            nb-aspect:tooltip="this.copied ? 'Copied' : 'Copy'">
+        <span class="icon" nb-if="!this.copied" nb-template="@icon-copy"></span>
+        <span class="icon" nb-if="this.copied" nb-template="@icon-check"></span>
+    </button>
+</figure>

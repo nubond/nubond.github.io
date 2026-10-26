@@ -1,0 +1,20 @@
+<style>
+    .active { color: #3fc495; font-weight: bold; }
+    .big { font-size: 1.3em; }
+    .warm { background: #f9731633; }
+    .cool { background: #0ea5e933; }
+    .bar { height: 26px; border-radius: 6px; color: #000; padding-left: 8px; }
+</style>
+
+<p nb-class="{active: this.active; 'is-off': !this.active}">Object: class → condition</p>
+<p nb-class="this.size">String: the value is the class</p>
+<p nb-class="[this.size; this.tone]">Array: several class expressions</p>
+<div class="bar" nb-style="width: this.width + '%'; background: this.color">{{ this.width }}%</div>
+
+<p>
+    <label><input type="checkbox" checked nb-event:change="this.active = nativeElement.checked"> active</label>
+    <select nb-event:change="this.size = nativeElement.value"><option>big</option><option>small</option></select>
+    <select nb-event:change="this.tone = nativeElement.value"><option>warm</option><option>cool</option></select>
+    <input type="range" min="10" max="100" value="60" nb-event:input="this.width = +nativeElement.value">
+    <input type="color" value="#3fc495" nb-event:input="this.color = nativeElement.value">
+</p>

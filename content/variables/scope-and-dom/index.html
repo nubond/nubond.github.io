@@ -1,0 +1,12 @@
+<!-- nb-var: computed once per pass, visible to children; later vars see earlier ones -->
+<div nb-var:total="this.price * this.quantity" nb-var:tax="total * 0.2">
+    <p>{{ this.quantity }} × ${{ this.price }} = ${{ total }}, tax ${{ tax }}</p>
+    <button nb-event:click="this.quantity++">One more</button>
+</div>
+
+<!-- nb-exec: runs every pass, renders nothing -->
+<span nb-exec="this.passes++"></span>
+<p><small>passes so far: {{ this.passes }}</small></p>
+
+<!-- nb-bound: runs once, with the DOM element at hand -->
+<canvas width="110" height="60" nb-bound="this.draw(nativeElement)"></canvas>

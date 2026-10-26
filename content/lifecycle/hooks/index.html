@@ -1,0 +1,4 @@
+<button nb-event:click="this.view = this.view ? '' : 'Clock'">{{ this.view ? 'Remove' : 'Add' }} the clock</button>
+<button nb-event:click="this.format = this.format === 'time' ? 'date' : 'time'">Show {{ this.format === 'time' ? 'date' : 'time' }}</button>
+
+<div nb-container="this.view" nb-in:format="this.format"></div>

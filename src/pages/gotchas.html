@@ -1,0 +1,30 @@
+<article class="doc">
+    <h1>Gotchas</h1>
+    <p class="lead">The mistakes everyone makes once. nuBond reports problems with <code>nuBond:</code> messages in the console instead of throwing — keep it open.</p>
+
+    <div class="table">
+        <table>
+            <thead><tr><th>Symptom</th><th>Cause and fix</th></tr></thead>
+            <tbody>
+                <tr><td>A region stays empty, <code>… not found</code></td><td>The entity is used only in markup and was never imported. Pass it to the decorator of the container or component that uses it — or to <code>@AppRoot</code> if it is used app-wide: <code>@Container(html, MyCard, Tooltip)</code>.</td></tr>
+                <tr><td>An input or variable is always <code>undefined</code></td><td>HTML lowercases attribute names: write <code>nb-in:user-name</code>, not <code>nb-in:userName</code>. Repeat prefixes are not converted at all — keep them one lowercase word.</td></tr>
+                <tr><td>The view does not update</td><td>Nothing triggered a pass: a timer, a promise or a service changed the data. Use <code>@Detector()</code> or <code>detect()</code>.</td></tr>
+                <tr><td><code>@Detector()</code> does not fire</td><td>The object was mutated, not replaced. Assign a new one.</td></tr>
+                <tr><td>An expression always returns <code>undefined</code></td><td>A <code>;</code> in the expression — separate statements with commas.</td></tr>
+                <tr><td>A control is disabled forever</td><td><code>nb-attr:disabled="false"</code> still disables. Use <code>cond ? '' : null</code> or <code>nb-prop</code>.</td></tr>
+                <tr><td><code>nb-case</code> never matches</td><td>Type mismatch: <code>@5</code> is a number, route and input values are strings — write <code>nb-case="'5'"</code>.</td></tr>
+                <tr><td>An <code>nb-in</code> value arrives as <code>undefined</code></td><td>It cannot be cloned (a function, a DOM node). Use <code>nb-in-ref</code>.</td></tr>
+                <tr><td>A child's DOM is stale after an edit</td><td>With <code>nb-in-ref</code> an in-place change is invisible. Assign a new object.</td></tr>
+                <tr><td>A parent never hears an event</td><td>Custom events do not bubble, and HTML lowercases names: dispatch <code>item-selected</code>, not <code>itemSelected</code>.</td></tr>
+                <tr><td>A service arrives as <code>undefined</code></td><td>The parameter is typed with an interface, <code>any</code> or a union. Use a class.</td></tr>
+                <tr><td>Wrong row state after sorting</td><td><code>nb-repeat</code> reuses rows by position. Keep per-row state in the data, not in the DOM.</td></tr>
+                <tr><td>Projected markup sees the wrong <code>this</code></td><td>Projected content binds in the receiving template. Pass data with <code>nb-in</code>.</td></tr>
+                <tr><td>A component built by hand is empty</td><td>Components start only inside a nuBond template, never via <code>document.createElement</code>.</td></tr>
+                <tr><td>A class is missing after minification</td><td>nuBond uses class names. Keep them (<code>keep_classnames</code>) or give entities explicit names.</td></tr>
+                <tr><td>Bindings on one element are dropped with an error</td><td>Some cannot share an element: only one of <code>nb-value</code>, <code>nb-html</code>, <code>nb-switch</code>, <code>nb-container</code>, a component tag, <code>nb-template</code>; and <code>nb-case</code> / <code>nb-default</code> exclude <code>nb-repeat</code> and <code>nb-if</code>. Nest an element instead.</td></tr>
+                <tr><td><code>multiple handlers for one … are not supported</code></td><td>Two attributes target the same thing (<code>nb-event:click:100</code> + <code>nb-event:click:200</code>, <code>nb-in:x</code> + <code>nb-in-ref:x</code>). The first wins.</td></tr>
+                <tr><td><code>template '…' not found</code></td><td><code>$Template</code> ran after the element using it was built. Register it in the array of the <code>@AppRoot</code> or <code>@Container</code> that uses it — <code>@Container(html, [$Template(…)])</code> — or, for a component, of its parent.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</article>

@@ -1,0 +1,21 @@
+<!-- Shared by the Containers and Components lessons: inputs and outputs work the same for both. -->
+<h2>Inputs &amp; outputs</h2>
+<p>Containers and components talk to their parent the same way: data goes down through inputs, events come up as outputs.</p>
+<div class="table io">
+    <table>
+        <thead><tr><th></th><th>Parent template</th><th>Child class</th></tr></thead>
+        <tbody>
+            <tr><td>Input</td><td><code>nb-in:page-size="this.size"</code></td><td><code>public pageSize = 10;</code> receives a deep copy</td></tr>
+            <tr><td>Input by reference</td><td><code>nb-in-ref:store="this.store"</code></td><td><code>public store?: Store;</code> receives the same object</td></tr>
+            <tr><td>Output</td><td><code>nb-event:saved="this.reload(data)"</code></td><td>injects <code>EventDispatcher</code> and calls <code>dispatch('saved', id)</code>, or assigns an <code>@Eventer()</code> property</td></tr>
+        </tbody>
+    </table>
+</div>
+<ul>
+    <li>Names are kebab-case in markup and camelCase in the class: <code>nb-in:page-size</code> sets <code>pageSize</code>.</li>
+    <li>An input is delivered only when it changes — a value deeply equal to the last one is skipped. Then the child runs a pass and its <code>onInputsRefreshDone()</code> hook.</li>
+    <li><code>nb-in</code> copies with <code>structuredClone</code>: the child cannot touch the parent's data, and in-place edits in the parent still arrive.
+        Functions, class instances, DOM nodes and anything else that cannot be cloned need <code>nb-in-ref</code> — where only assigning a new object updates the child.</li>
+    <li>Treat inputs as read-only in the child; change the data in the parent.</li>
+    <li>Output events do not bubble: only the direct parent hears them — dispatch again to go further up. Use kebab-case event names, because HTML lowercases <code>nb-event:itemSaved</code>.</li>
+</ul>

@@ -1,0 +1,41 @@
+:host {
+    display: block;
+    min-width: 0;
+    background: var(--code-bg);
+}
+
+// The highlighted <pre> and the transparent <textarea> share one grid cell, so the
+// textarea always has exactly the size of the rendered code.
+.editor {
+    display: grid;
+    max-height: 460px;
+    overflow: auto;
+    padding: 12px 0;
+}
+
+.editor > * {
+    grid-area: 1 / 1;
+    margin: 0;
+    padding: 0 16px;
+    border: 0;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    line-height: 1.6;
+    tab-size: 4;
+    white-space: pre;
+    letter-spacing: normal;
+}
+
+textarea {
+    min-height: 100%;
+    resize: none;
+    overflow: hidden;
+    outline: none;
+    background: transparent;
+    color: transparent;
+    caret-color: var(--fg);
+}
+
+textarea::selection {
+    background: var(--selection);
+}

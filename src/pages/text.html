@@ -1,0 +1,36 @@
+<article class="doc">
+    <h1>Text &amp; HTML</h1>
+    <p class="lead">Put values into the page with <code>&#123;&#123; expression &#125;&#125;</code>, or with the <code>nb-value</code> and <code>nb-html</code> attributes.</p>
+
+    <live-example nb-in:name="@text/interpolation"></live-example>
+
+    <div class="table">
+        <table>
+            <thead><tr><th>Write</th><th>Result</th></tr></thead>
+            <tbody>
+                <tr><td><code>&#123;&#123; expr &#125;&#125;</code></td><td>Text, mixed freely with literal text. The default choice.</td></tr>
+                <tr><td><code>nb-value="expr"</code></td><td>The element's <code>textContent</code>. <code>&#123;&#123; expr &#125;&#125;</code> compiles to <code>&lt;span nb-value="expr"&gt;</code>.</td></tr>
+                <tr><td><code>nb-html="expr"</code></td><td>The element's <code>innerHTML</code>.</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p>
+        Values are converted to text: <code>null</code> and <code>undefined</code> become an empty string,
+        objects and arrays become JSON.
+    </p>
+
+    <doc-note nb-in:kind="@warn">
+        <p nb-projection><code>nb-html</code> is not sanitized unless you register an <code>htmlSanitizer</code> — never feed it
+        user input as is. See <a href="#/configuration">Configuration &amp; security</a>.</p>
+    </doc-note>
+    <doc-note>
+        <p nb-projection><code>&#123;&#123; &#125;&#125;</code> is a build step (a PostHTML plugin, preconfigured by <code>npm create nubond</code>).
+        Inside <code>&lt;option&gt;</code>, <code>&lt;title&gt;</code> and <code>&lt;textarea&gt;</code> — elements that
+        cannot hold a <code>&lt;span&gt;</code> — use <code>nb-value</code> instead.</p>
+    </doc-note>
+    <doc-note>
+        <p nb-projection>In <a href="#/configuration">W3C mode</a>, add <code>"nubond": &#123; "compliantWithW3CInterpolation": true &#125;</code>
+        to <code>package.json</code> — <code>&#123;&#123; &#125;&#125;</code> then compiles to <code>&lt;span data-nb-value="expr"&gt;</code>.
+        Without it, the spans stay empty.</p>
+    </doc-note>
+</article>

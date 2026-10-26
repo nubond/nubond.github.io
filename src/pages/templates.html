@@ -1,0 +1,38 @@
+<article class="doc">
+    <h1>Templates &amp; projection</h1>
+    <p class="lead">Reuse markup: register a snippet once with <code>$Template</code>, or pass markup into a container or component with projection.</p>
+
+    <h2>Global templates</h2>
+    <live-example nb-in:name="@templates/global-templates" nb-in:open="@index.ts"></live-example>
+    <ul>
+        <li><code>$Template(name, html)</code> registers a fragment; <code>nb-template="@name"</code> puts it inside an element.</li>
+        <li>The fragment binds in the scope it lands in — here each row's <code>item</code>.</li>
+        <li>A template must be registered before an element using it is built. <code>$Template</code> returns the name, so register it
+            in the array of the <code>@AppRoot</code> or <code>@Container</code> that needs it: <code>@Container(html, [$Template('price-tag', tagHtml)])</code>.
+            Not in a <code>@Component</code> — its array lists adopted styles, so the name would be taken as a style. For a component,
+            register the template in its parent container or the app root.</li>
+    </ul>
+
+    <h2>Projection</h2>
+    <live-example nb-in:name="@templates/projection"></live-example>
+    <div class="table">
+        <table>
+            <thead><tr><th>Where</th><th>Attribute</th><th>Does</th></tr></thead>
+            <tbody>
+                <tr><td>user</td><td><code>nb-projection="@name"</code></td><td>Marks content for the slot <code>@name</code>; without a value, for the default slot.</td></tr>
+                <tr><td>template</td><td><code>nb-project-to="@name"</code></td><td>The content replaces the slot element's <em>children</em>.</td></tr>
+                <tr><td>template</td><td><code>nb-project-instead="@name"</code></td><td>The content replaces the slot element <em>itself</em>.</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <ul>
+        <li>Slot names are matched as written, so use the same text on both sides.</li>
+        <li>A slot that receives nothing keeps its own content — a built-in default.</li>
+        <li>Only one element may target the default slot; wrap several in one element.</li>
+        <li>Works the same for containers, components and <code>$Template</code>s.</li>
+    </ul>
+    <doc-note nb-in:kind="@warn">
+        <p nb-projection>Projected markup is copied into the receiving template and bound there: <code>this</code> is the card, not the page that
+        wrote the markup. Hand data to the card through <code>nb-in</code>.</p>
+    </doc-note>
+</article>

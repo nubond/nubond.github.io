@@ -1,0 +1,35 @@
+<article class="doc">
+    <h1>Helpers &amp; tooling</h1>
+    <p class="lead"><code>Helpers</code> holds the checks and conversions nuBond uses itself; the tooling gets a project going and keeps it pleasant.</p>
+
+    <live-example nb-in:name="@toolbox/helpers" nb-in:open="@index.ts"></live-example>
+    <div class="table">
+        <table>
+            <tbody>
+                <tr><td>Checks</td><td><code>isUndefined</code> <code>isString</code> <code>isNotEmptyString</code> (no trim) <code>isNumber</code> <code>isBoolean</code>
+                    <code>isObject</code> <code>isArray</code> <code>isTypedArray</code> <code>isIterableCollection</code> (<code>Map</code>/<code>Set</code>)
+                    <code>isFunction</code> <code>isSymbol</code> <code>isBigInt</code> <code>isPrimitive</code></td></tr>
+                <tr><td>Names</td><td><code>isValidIdentifier</code> <code>isValidElementName</code> <code>isValidCustomElementName</code>
+                    <code>fromKebabToCamelCase</code> <code>fromCamelToKebabCase</code> <code>toCamelCase</code> / <code>toPascalCase</code> (first letter only)</td></tr>
+                <tr><td>Values</td><td><code>equals</code> (deep) <code>stringify</code> <code>format('&#123;0&#125;', …)</code> <code>split(value, ';', '\\')</code> (escapable separator)</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p><code>equals</code> is the comparison behind <code>nb-in</code>, <code>@Detector</code>, <code>@Eventer</code> and aspect <code>data</code>; <code>stringify</code> is how values become text.</p>
+
+    <h2><code>CallBackEvent</code></h2>
+    <p>A typed event for your services — what the <a href="#/dependency-injection">Cart</a> example uses.</p>
+    <code-view nb-in:name="@toolbox/callback-event.ts"></code-view>
+
+    <h2>Tooling</h2>
+    <code-view nb-in:name="@toolbox/cli.sh"></code-view>
+    <ul>
+        <li><strong><code>create-nubond</code></strong> — scaffolds a Parcel + TypeScript project (<code>blank</code>, <code>native</code>, <code>showcase</code>) with the generators above.</li>
+        <li><strong><code>@nubond/posthtml-value-interpolation</code></strong> — the build step behind <code>&#123;&#123; &#125;&#125;</code>.
+            For W3C mode, set <code>"nubond": &#123; "compliantWithW3CInterpolation": true &#125;</code> in <code>package.json</code>.</li>
+        <li><strong>Parcel setup</strong> — any <code>.html</code> / <code>.scss</code> / <code>.css</code> file imports as a string, except the entry files
+            <code>index.*</code> and <code>app.*</code>, which Parcel bundles. Prefix a URL with <code>ref:</code> (<code>href="ref:npm:pkg/x.css"</code>) to link a file instead of inlining it.</li>
+        <li><strong>One file</strong> — nuBond has no runtime dependencies, so an app can be bundled into a single JavaScript file.</li>
+        <li><strong>nuBond Language Service</strong> for VS Code — completion, hover, go to definition, rename and diagnostics inside templates. Enable it with <code>"nubond": &#123; "languageService": true &#125;</code> in <code>package.json</code>.</li>
+    </ul>
+</article>

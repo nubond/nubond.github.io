@@ -1,0 +1,21 @@
+<article class="doc">
+    <h1>Variables &amp; DOM access</h1>
+    <p class="lead">Three small attributes for the remaining jobs: name a value, run code on every pass, get hold of an element.</p>
+
+    <live-example nb-in:name="@variables/scope-and-dom"></live-example>
+
+    <div class="table">
+        <table>
+            <thead><tr><th>Attribute</th><th>Does</th></tr></thead>
+            <tbody>
+                <tr><td><code>nb-var:name="expr"</code></td><td>Evaluates once per pass and exposes the result as <code>name</code> to the element and its children. Several on one element see each other left to right. <code>nb-var:unit-price</code> becomes <code>unitPrice</code>.</td></tr>
+                <tr><td><code>nb-exec="expr"</code></td><td>Runs on every pass; renders nothing.</td></tr>
+                <tr><td><code>nb-bound="expr"</code></td><td>Runs once, when the element is bound, with <code>nativeElement</code> and <code>element</code> — keep a reference, start a chart, focus a field.</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <doc-note nb-in:kind="@tip">
+        <p nb-projection><code>nb-var</code> is also a cache: a costly getter used ten times inside an element runs once per pass when you put it in a variable.</p>
+    </doc-note>
+    <p>Variable names cannot reuse the built-in ones: <code>item</code>, <code>index</code>, <code>count</code>, <code>event</code>, <code>data</code>, <code>element</code>, <code>nativeElement</code>, <code>unSubscribe</code>, <code>router</code>.</p>
+</article>

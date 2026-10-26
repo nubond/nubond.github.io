@@ -1,0 +1,13 @@
+:host {
+    display: block;
+    --color: var(--box-color, #3fc495);
+}
+
+:host([kind=warn]) {
+    --color: orange;
+}
+
+p {
+    border-color: var(--color);
+    color: var(--color);
+}

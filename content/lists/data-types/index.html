@@ -1,0 +1,11 @@
+<!-- nested: name the outer repeat, its variables get the prefix -->
+<p nb-repeat:group="this.groups">
+    <b>{{ groupItem.name }}:</b>
+    <span nb-repeat="groupItem.items">{{ item }}{{ count - index > 1 ? ', ' : '' }}</span>
+</p>
+
+<!-- a number repeats N times; item counts from 1 -->
+<p><span nb-repeat="5" nb-event:click="this.stars = item">{{ item <= this.stars ? '★' : '☆' }}</span> {{ this.stars }}/5</p>
+
+<!-- a Map gives [key, value] pairs; strings, Sets and objects work too -->
+<p nb-repeat="this.prices">{{ item[0] }}: ${{ item[1] }}</p>

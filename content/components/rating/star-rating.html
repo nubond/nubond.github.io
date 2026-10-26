@@ -1,0 +1,4 @@
+<button nb-repeat="this.max"
+        nb-class="{on: item <= this.value}"
+        nb-attr:aria-label="item + ' stars'"
+        nb-event:click="this.select(item)">★</button>

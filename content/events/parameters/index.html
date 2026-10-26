@@ -1,0 +1,12 @@
+<!-- event: the DOM event -->
+<input placeholder="Press a key" nb-event:keydown="this.lastKey = event.key">
+<b>{{ this.lastKey }}</b>
+
+<!-- element: change the element itself (styles, classes, attributes…) -->
+<p nb-event:mouseenter="element.styles.set('background', 'gold')"
+   nb-event:mouseleave="element.styles.set('background', null)">Hover me</p>
+
+<!-- unSubscribe: stop listening whenever you decide -->
+<button nb-event:click="this.clicks++, this.clicks === 3 && unSubscribe()">
+    Stops after 3 clicks ({{ this.clicks }})
+</button>

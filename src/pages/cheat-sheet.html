@@ -1,0 +1,74 @@
+<article class="doc">
+    <h1>Cheat sheet</h1>
+    <p class="lead">Everything on one page.</p>
+
+    <h2>Bindings</h2>
+    <div class="table">
+        <table>
+            <tbody>
+                <tr><td><code>&#123;&#123; expr &#125;&#125;</code> · <code>nb-value</code></td><td>text</td></tr>
+                <tr><td><code>nb-html</code></td><td>innerHTML (sanitize!)</td></tr>
+                <tr><td><code>nb-class</code></td><td><code>"name"</code> · <code>"[a; b]"</code> · <code>"{name: cond; …}"</code></td></tr>
+                <tr><td><code>nb-style</code></td><td><code>"prop: expr; prop: expr"</code></td></tr>
+                <tr><td><code>nb-attr:name</code></td><td>attribute, <code>null</code> removes</td></tr>
+                <tr><td><code>nb-prop:name</code></td><td>DOM property</td></tr>
+                <tr><td><code>nb-if</code></td><td>show while truthy</td></tr>
+                <tr><td><code>nb-switch</code> · <code>nb-case</code> · <code>nb-default</code></td><td>show the matching case (<code>===</code>)</td></tr>
+                <tr><td><code>nb-repeat</code> · <code>nb-repeat:prefix</code></td><td>one element per item: <code>item</code>, <code>index</code>, <code>count</code></td></tr>
+                <tr><td><code>nb-event:name[:ms]</code></td><td>handler, optional debounce</td></tr>
+                <tr><td><code>nb-var:name</code></td><td>local variable for children</td></tr>
+                <tr><td><code>nb-exec</code> · <code>nb-bound</code></td><td>run every pass · run once</td></tr>
+                <tr><td><code>nb-container</code></td><td><code>"@Name"</code>, an expression, or <code>"%slot"</code></td></tr>
+                <tr><td><code>&lt;my-component&gt;</code></td><td>a component by its tag</td></tr>
+                <tr><td><code>nb-in:name</code> · <code>nb-in-ref:name</code></td><td>input, copied · by reference</td></tr>
+                <tr><td><code>nb-aspect:name</code></td><td>attach an aspect</td></tr>
+                <tr><td><code>nb-template</code></td><td>insert a <code>$Template</code></td></tr>
+                <tr><td><code>nb-projection</code> · <code>nb-project-to</code> · <code>nb-project-instead</code></td><td>projection</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p>Write names after <code>:</code> in kebab-case (<code>nb-in:page-size</code> → <code>pageSize</code>). W3C mode: <code>data-nb-*</code>, and <code>--</code> instead of <code>:</code> — plus <code>"nubond": &#123; "compliantWithW3CInterpolation": true &#125;</code> in <code>package.json</code> for <code>&#123;&#123; &#125;&#125;</code>.</p>
+
+    <h2>Expressions</h2>
+    <div class="table">
+        <table>
+            <tbody>
+                <tr><td>prefixes</td><td><em>none</em> every pass · <code>#</code> once · <code>@</code> constant · <code>%</code> route slot</td></tr>
+                <tr><td>statements</td><td>separated by <code>,</code> — never <code>;</code></td></tr>
+                <tr><td>in events</td><td><code>event</code> <code>data</code> <code>nativeElement</code> <code>element</code> <code>unSubscribe</code> <code>router</code></td></tr>
+                <tr><td>in repeats</td><td><code>item</code> <code>index</code> <code>count</code> (<code>prefixItem</code> …)</td></tr>
+                <tr><td>in <code>nb-bound</code></td><td><code>nativeElement</code> <code>element</code></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Decorators &amp; functions</h2>
+    <div class="table">
+        <table>
+            <tbody>
+                <tr><td><code>@AppRoot(config?, '/route', selector?, [registrations], ...deps)</code></td><td>the app</td></tr>
+                <tr><td><code>@Container(html, [registrations], config?, ...deps)</code></td><td>inline template</td></tr>
+                <tr><td><code>@Component(html, css?, ['adopted'], config?, BaseElement?, ...deps)</code></td><td>custom element</td></tr>
+                <tr><td><code>@Aspect(css?, ['adopted'])</code></td><td>element behavior, <code>data</code> getter + setter</td></tr>
+                <tr><td><code>@Transformer(name?)</code></td><td>template function, <code>transform()</code></td></tr>
+                <tr><td><code>@Injectable(singleton?)</code></td><td>service</td></tr>
+                <tr><td><code>@Detector()</code> · <code>@Eventer(name?)</code></td><td>assignment triggers a pass · dispatches an event</td></tr>
+                <tr><td><code>$Template</code> · <code>$AdoptedStyle</code> · <code>$Injectable</code> · <code>$Config</code> · <code>$Route</code> · <code>$GlobalShadowRootConfig</code></td><td>registration without decorators</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Services &amp; hooks</h2>
+    <div class="table">
+        <table>
+            <tbody>
+                <tr><td><code>ChangeDetector</code></td><td><code>detect()</code></td></tr>
+                <tr><td><code>EventDispatcher</code></td><td><code>dispatch(name, data?)</code></td></tr>
+                <tr><td><code>ElementManipulations</code></td><td><code>attributes</code> · <code>classes</code> · <code>styles</code> · <code>properties</code></td></tr>
+                <tr><td><code>ElementSubscriptions</code></td><td><code>subscribe(event, cb, options?, debounce?)</code></td></tr>
+                <tr><td><code>Router</code></td><td><code>go</code> · <code>goBack</code> · <code>goForward</code> · <code>goTo</code> · <code>state</code> · <code>onBeforeStateChange</code> · <code>onAfterStateChange</code></td></tr>
+                <tr><td>hooks</td><td><code>onInputsRefreshDone</code> · <code>onDetectChangesDone</code> · <code>onDispose</code> · <code>onContainerAttached</code> · <code>onContainerDetached</code></td></tr>
+            </tbody>
+        </table>
+    </div>
+</article>

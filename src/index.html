@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="nuBond documentation: 15 minutes and you know all the basics, 15 minutes more and you know everything. Short explanations with live, editable examples.">
+    <meta name="color-scheme" content="light dark">
+
+    <title>nuBond docs</title>
+
+    <link rel="icon" type="image/x-icon" href="./assets/icon.ico">
+    <link rel="apple-touch-icon" sizes="512x512" type="image/png" href="./assets/icon.png">
+
+    <link rel="stylesheet" href="./index.scss">
+
+    <script type="module" src="./index.ts"></script>
+  </head>
+  <body>
+    <a class="skip" href="#content" nb-event:click="event.preventDefault(), document.getElementById('content').focus()">Skip to content</a>
+
+    <header class="topbar">
+      <button class="icon-button menu" aria-label="Menu"
+              nb-attr:aria-expanded="this.menuOpen ? 'true' : 'false'"
+              nb-event:click="this.menuOpen = !this.menuOpen">
+        <span class="icon" nb-template="@icon-menu"></span>
+      </button>
+      <a class="brand" href="#/introduction">
+        <img src="./assets/icon.png" alt="" width="28" height="28">
+        <span>nuBond <small>docs</small></span>
+      </a>
+      <div class="progress" nb-aspect:tooltip="@Lessons you have opened">
+        <span class="meter"><span nb-style="width: (100 * this.readCount() / this.lessonCount()) + '%'"></span></span>
+        {{ this.readCount() }} / {{ this.lessonCount() }}
+      </div>
+      <a class="icon-button" href="https://github.com/nubond/nubond" target="_blank" rel="noopener"
+         nb-aspect:tooltip="@nuBond on GitHub">
+        <span class="icon" nb-template="@icon-github"></span>
+      </a>
+      <button class="icon-button" nb-event:click="this.themeService.toggle()"
+              nb-aspect:tooltip="this.themeService.theme === 'dark' ? 'Light theme' : 'Dark theme'">
+        <span class="icon" nb-if="this.themeService.theme === 'dark'" nb-template="@icon-sun"></span>
+        <span class="icon" nb-if="this.themeService.theme !== 'dark'" nb-template="@icon-moon"></span>
+      </button>
+    </header>
+
+    <div class="layout">
+      <nav class="sidebar" aria-label="Lessons" nb-class="{open: this.menuOpen}">
+        <label class="search">
+          <span class="icon" nb-template="@icon-search"></span>
+          <input type="search" placeholder="Filter lessons" aria-label="Filter lessons"
+                 nb-event:input:150="this.filter = nativeElement.value">
+        </label>
+
+        <section class="part" nb-repeat:part="this.catalog.parts"
+                 nb-if="partItem.pages.some(page => this.catalog.matches(page, this.filter))">
+          <h2>
+            {{ partItem.title }}
+            <small>{{ partItem.subtitle }}</small>
+          </h2>
+          <a nb-repeat="partItem.pages"
+             nb-if="this.catalog.matches(item, this.filter)"
+             nb-attr:href="'#/' + item.id"
+             nb-attr:aria-current="this.page?.id === item.id ? 'page' : null"
+             nb-class="{active: this.page?.id === item.id; visited: this.progress.has(item.id)}">
+            <span class="title">{{ item.title }}</span>
+            <span class="minutes" nb-if="item.minutes > 0">{{ item.minutes }}′</span>
+          </a>
+        </section>
+      </nav>
+      <div class="scrim" nb-if="this.menuOpen" nb-event:click="this.menuOpen = false"></div>
+
+      <main id="content" tabindex="-1">
+        <div class="page" nb-container="%page"></div>
+
+        <nav class="pager" aria-label="Previous and next lesson"
+             nb-var:previous="this.catalog.previous(this.page?.id)"
+             nb-var:next="this.catalog.next(this.page?.id)">
+          <a class="previous" nb-if="previous" nb-attr:href="previous ? '#/' + previous.id : null">
+            <small>Previous</small>
+            <span><span class="icon" nb-template="@icon-left"></span> {{ previous?.title }}</span>
+          </a>
+          <a class="next" nb-if="next" nb-attr:href="next ? '#/' + next.id : null">
+            <small>Next</small>
+            <span>{{ next?.title }} <span class="icon" nb-template="@icon-right"></span></span>
+          </a>
+        </nav>
+      </main>
+    </div>
+  </body>
+</html>

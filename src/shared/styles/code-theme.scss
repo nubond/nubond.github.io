@@ -1,0 +1,74 @@
+// Shared by every component that shows code — registered as the 'code-theme' adopted style.
+// Colors come from custom properties set on :root (index.scss); they inherit into shadow roots.
+.code {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    line-height: 1.6;
+    tab-size: 4;
+    white-space: pre;
+    color: var(--code-fg);
+}
+
+.t-c { color: var(--t-comment); font-style: italic; }
+.t-k { color: var(--t-keyword); }
+.t-s { color: var(--t-string); }
+.t-n, .t-const { color: var(--t-number); }
+.t-d { color: var(--t-decorator); }
+.t-t { color: var(--t-type); }
+.t-f { color: var(--t-function); }
+.t-tag { color: var(--t-tag); }
+.t-a { color: var(--t-attr); }
+.t-nb { color: var(--t-nb); font-weight: 600; }
+.t-m { color: var(--t-meta); }
+.t-v { color: var(--t-string); }
+.t-i, .t-px { color: var(--t-nb); font-weight: 600; }
+.t-sel { color: var(--t-tag); }
+.t-prop { color: var(--t-attr); }
+.t-at { color: var(--t-keyword); }
+
+.icon {
+    display: inline-flex;
+    width: 16px;
+    height: 16px;
+}
+
+.icon svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 10px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    color: var(--fg);
+    font: 500 12.5px/1.5 var(--font-sans);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.button:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+}
+
+.button.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-fg);
+}
+
+.button.primary:hover {
+    filter: brightness(1.08);
+}

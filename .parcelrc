@@ -1,0 +1,34 @@
+{
+  "extends": "@parcel/config-default",
+  "transformers": {
+    "sandbox.html": ["@parcel/transformer-html"],
+    "ref:*.{htm,html,xhtml}": ["@parcel/transformer-posthtml", "@parcel/transformer-html"],
+    "{index,app}.{htm,html,xhtml}": ["@parcel/transformer-posthtml", "@parcel/transformer-html"],
+    "*.{htm,html,xhtml}": ["@parcel/transformer-posthtml", "@parcel/transformer-html", "@parcel/transformer-inline-string"],
+
+
+    "ref:*.{styl,stylus}": ["@parcel/transformer-stylus"],
+    "{index,app}.{styl,stylus}": ["@parcel/transformer-stylus"],
+    "*.{styl,stylus}": ["...", "@parcel/transformer-inline-string"],
+
+    "ref:*.{sass,scss}": ["@parcel/transformer-sass"],
+    "{index,app}.{sass,scss}": ["@parcel/transformer-sass"],
+    "*.{sass,scss}": ["...", "@parcel/transformer-inline-string"],
+
+    "ref:*.less": ["@parcel/transformer-less"],
+    "{index,app}.less": ["@parcel/transformer-less"],
+    "*.less": ["...", "@parcel/transformer-inline-string"],
+
+    "ref:*.{css,pcss}": ["@parcel/transformer-postcss", "@parcel/transformer-css"],
+    "{index,app}.{css,pcss}": ["@parcel/transformer-postcss", "@parcel/transformer-css"],
+    "*.{css,pcss}": ["...", "@parcel/transformer-inline-string"],
+
+    "ref:*.sss": ["@parcel/transformer-sugarss"],
+    "{index,app}.sss": ["@parcel/transformer-sugarss"],
+    "*.sss": ["...", "@parcel/transformer-inline-string"],
+
+
+    "*.{ts,tsx}": ["@parcel/transformer-typescript-tsc"],
+    '*.png': ['@parcel/transformer-raw']
+  }
+}

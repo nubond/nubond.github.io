@@ -1,0 +1,30 @@
+:host {
+    display: block;
+    margin: 14px 0;
+}
+
+.note {
+    --note-color: var(--info);
+    display: flex;
+    gap: 10px;
+    padding: 10px 14px;
+    border: 1px solid color-mix(in srgb, var(--note-color) 35%, transparent);
+    border-left: 3px solid var(--note-color);
+    border-radius: 6px;
+    background: color-mix(in srgb, var(--note-color) 7%, var(--bg));
+    font-size: 14.5px;
+    line-height: 1.55;
+}
+
+.note.tip { --note-color: var(--accent); }
+.note.warn { --note-color: var(--warn); }
+
+.icon {
+    flex: none;
+    margin-top: 3px;
+    color: var(--note-color);
+}
+
+.body {
+    min-width: 0;
+}

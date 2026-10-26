@@ -1,0 +1,35 @@
+<article class="doc">
+    <h1>Events</h1>
+    <p class="lead"><code>nb-event:name="expression"</code> runs the expression when the element fires the event — then the view updates.</p>
+
+    <live-example nb-in:name="@events/handlers"></live-example>
+
+    <h2>Debounce and once</h2>
+    <ul>
+        <li><code>nb-event:input:400</code> — a number after the event name debounces the handler by that many milliseconds.</li>
+        <li><code>nb-event:click="#this.start()"</code> — the <code>#</code> prefix runs the handler once, then unsubscribes.</li>
+        <li>Any event works, custom ones included: <code>nb-event:item-selected</code>, <code>nb-event:plugin:ready</code>.</li>
+    </ul>
+
+    <h2>What a handler can use</h2>
+    <live-example nb-in:name="@events/parameters"></live-example>
+    <div class="table">
+        <table>
+            <thead><tr><th>Name</th><th>Value</th></tr></thead>
+            <tbody>
+                <tr><td><code>event</code></td><td>The DOM event.</td></tr>
+                <tr><td><code>data</code></td><td><code>event.detail</code> — the payload of a custom event.</td></tr>
+                <tr><td><code>nativeElement</code></td><td>The DOM element.</td></tr>
+                <tr><td><code>element</code></td><td>Helpers for that element: <code>styles</code>, <code>classes</code>, <code>attributes</code>, <code>properties</code>.</td></tr>
+                <tr><td><code>unSubscribe</code></td><td>A function that stops this handler.</td></tr>
+                <tr><td><code>router</code></td><td>The router, when routing is configured.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <doc-note nb-in:kind="@warn">
+        <p nb-projection>Every handler run triggers a change-detection pass. Do not bind events that fire constantly —
+        <code>pointermove</code>, <code>scroll</code>, <code>dragover</code> — with <code>nb-event</code>; see the
+        <a href="#/aspects">Aspects</a> example for the alternative.</p>
+    </doc-note>
+</article>

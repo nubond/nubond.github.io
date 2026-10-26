@@ -1,0 +1,13 @@
+<button nb-event:click="this.loggedIn = !this.loggedIn">{{ this.loggedIn ? 'Log out' : 'Log in' }}</button>
+<p nb-if="this.loggedIn">Welcome back!</p>
+<p nb-if="!this.loggedIn">Please log in.</p>
+
+<p>
+    <button nb-repeat="['idle', 'loading', 'done', 'oops']" nb-event:click="this.status = item">{{ item }}</button>
+</p>
+<div nb-switch="this.status">
+    <p nb-case="@idle">Nothing is happening.</p>
+    <p nb-case="@loading">Loading…</p>
+    <p nb-case="@done">Done ✓</p>
+    <p nb-default>Unknown status “{{ this.status }}”</p>
+</div>

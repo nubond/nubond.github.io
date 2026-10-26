@@ -1,0 +1,53 @@
+<article class="doc">
+    <h1>Hello, nuBond</h1>
+    <p class="lead">
+        nuBond is a small TypeScript framework for web apps: plain classes with decorators, HTML templates
+        with <code>nb-*</code> attributes, real Web Components. No runtime dependencies.
+    </p>
+
+    <div class="hero">
+        <a href="#/text">
+            <strong>The basics · 15 min</strong>
+            <span>Templates, events, lists, containers and components — enough to build an app.</span>
+        </a>
+        <a href="#/change-detection">
+            <strong>Everything else · 15 min</strong>
+            <span>Change detection, DI, routing, aspects, transformers, projection, configuration.</span>
+        </a>
+    </div>
+
+    <h2>Your first app</h2>
+    <p>
+        A class decorated with <code>@AppRoot()</code> becomes the app. Its markup is the page (<code>index.html</code>),
+        and every expression in it runs against the class instance — <code>this</code>.
+    </p>
+    <live-example nb-in:name="@introduction/hello" nb-in:open="@index.ts"></live-example>
+    <doc-note nb-in:kind="@tip">
+        <p nb-projection>Every example on this site is editable. Change the code — the result re-runs as you type.
+        <kbd>Ctrl</kbd>+<kbd>Enter</kbd> runs it right away, the reset button restores the original.</p>
+    </doc-note>
+
+    <h2>The building blocks</h2>
+    <div class="table">
+        <table>
+            <thead><tr><th>Decorator</th><th>What it is</th></tr></thead>
+            <tbody>
+                <tr><td><code>@AppRoot</code></td><td>Starts the app on an existing element (default: <code>&lt;body&gt;</code>).</td></tr>
+                <tr><td><code>@Container</code></td><td>A class + template rendered inline. Use it for pages and sections.</td></tr>
+                <tr><td><code>@Component</code></td><td>A class + template + CSS as a custom element with Shadow DOM.</td></tr>
+                <tr><td><code>@Aspect</code></td><td>A behavior you attach to any element.</td></tr>
+                <tr><td><code>@Transformer</code></td><td>A global function callable from any template expression.</td></tr>
+                <tr><td><code>@Injectable</code></td><td>A service delivered through constructor injection.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Start a project</h2>
+    <code-view nb-in:name="@introduction/create.sh"></code-view>
+    <p>
+        <code>blank</code> is a minimal starter, <code>native</code> adds Fluent UI web components, <code>showcase</code>
+        demonstrates every feature. Each comes with Parcel, TypeScript and <code>&#123;&#123; &#125;&#125;</code> interpolation preconfigured.
+        In an existing project, <code>npm install nubond</code> and enable two compiler options:
+    </p>
+    <code-view nb-in:name="@introduction/tsconfig.json"></code-view>
+</article>

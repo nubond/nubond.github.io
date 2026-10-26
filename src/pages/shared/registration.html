@@ -1,0 +1,16 @@
+<!-- Shared by the Containers and Components lessons: both register what their template uses the same way. -->
+<h2>Registering what a template uses</h2>
+<p>
+    Containers, components, aspects and transformers that appear only in markup must be passed to a decorator — that import
+    is what registers them. <code>@AppRoot</code>, <code>@Container</code> and <code>@Component</code> all take them as arguments.
+    Registrations go into the string array: <code>$Template</code> and <code>$AdoptedStyle</code> for <code>@AppRoot</code> and
+    <code>@Container</code>; a component's array holds adopted styles (see <a href="#/styles">Styles</a>). Put each one where its scope is:
+</p>
+<ul>
+    <li><strong>App-wide</strong> — shared templates and styles, aspects and transformers used everywhere: in <code>@AppRoot</code> or the main container.</li>
+    <li><strong>Local</strong> — used by one container or component only: in that entity's own decorator, <code>@Container(html, Counter)</code>, <code>@Component(html, css, Badge)</code>.</li>
+</ul>
+<doc-note nb-in:kind="@warn">
+    <p nb-projection>The registry is global either way — the place just keeps the dependency next to its user. Forget it everywhere and
+    the template fails at runtime with <code>… not found</code>, not at compile time.</p>
+</doc-note>

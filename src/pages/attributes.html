@@ -1,0 +1,27 @@
+<article class="doc">
+    <h1>Attributes &amp; properties</h1>
+    <p class="lead"><code>nb-attr:name</code> sets an HTML attribute, <code>nb-prop:name</code> sets a DOM property.</p>
+
+    <live-example nb-in:name="@attributes/attr-vs-prop"></live-example>
+
+    <div class="table">
+        <table>
+            <thead><tr><th></th><th><code>nb-attr:name</code></th><th><code>nb-prop:name</code></th></tr></thead>
+            <tbody>
+                <tr><td>Writes</td><td><code>setAttribute(name, String(value))</code></td><td><code>element[name] = value</code></td></tr>
+                <tr><td>Removes</td><td>when the value is <code>null</code> or <code>undefined</code></td><td>never — the value is assigned as is</td></tr>
+                <tr><td>Use for</td><td>ARIA, <code>href</code>, <code>data-*</code>, attributes CSS selects on</td><td><code>checked</code>, <code>disabled</code>, <code>value</code>, objects for web components</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ul>
+        <li>Names are written in kebab-case and converted: <code>nb-prop:read-only</code> sets <code>readOnly</code>.</li>
+        <li><code>class</code>, <code>style</code>, <code>textContent</code> and <code>innerHTML</code> are refused — use <code>nb-class</code>, <code>nb-style</code>, <code>nb-value</code>, <code>nb-html</code>.</li>
+    </ul>
+
+    <doc-note nb-in:kind="@warn">
+        <p nb-projection>A boolean attribute is on whenever it exists: <code>nb-attr:disabled="this.locked"</code> writes
+        <code>disabled="false"</code>, which <em>disables</em>. Write <code>this.locked ? '' : null</code>, or use <code>nb-prop:disabled</code>.</p>
+    </doc-note>
+</article>

@@ -1,0 +1,6 @@
+<div nb-container="@Counter"
+     nb-in:start="this.start"
+     nb-event:reached="this.log.unshift(`Counter reached ${data}`)"></div>
+
+<button nb-event:click="this.start += 10">Parent: start = {{ this.start }}</button>
+<p nb-repeat="this.log"><small>{{ item }}</small></p>

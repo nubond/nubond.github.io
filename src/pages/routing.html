@@ -1,0 +1,42 @@
+<article class="doc">
+    <h1>Routing</h1>
+    <p class="lead">Describe the URL with a route template, render the current page with <code>nb-container="%slot"</code>, navigate with <code>router.go()</code>.</p>
+
+    <live-example nb-in:name="@routing/pages" nb-in:open="@index.ts"></live-example>
+
+    <h2>The route template</h2>
+    <code-view nb-in:name="@routing/grammar.txt"></code-view>
+    <ul>
+        <li>A <code>[slot]</code> holds a container name; the container with that name renders into <code>nb-container="%slot"</code>.</li>
+        <li>A <code>{slot}</code> holds any value, read from <code>router.state.slot</code> — always a <strong>string</strong>.</li>
+        <li>A container slot set to a name that is not a registered container is refused with an error and keeps its value.</li>
+        <li>When a slot is empty, the slots after it go into the query string: <code>#/profile?tab=posts</code>.</li>
+        <li>In hash mode plain links route too: <code>&lt;a href="#/profile/ada"&gt;</code>.</li>
+        <li>Path mode (no <code>#</code>) owns the whole path — serve the app from the root of its domain.</li>
+    </ul>
+
+    <h2>The router</h2>
+    <div class="table">
+        <table>
+            <thead><tr><th>Member</th><th>Does</th></tr></thead>
+            <tbody>
+                <tr><td><code>go('home')</code></td><td>Sets the slot — allowed when the template has exactly one slot.</td></tr>
+                <tr><td><code>go({page: 'profile', user: 'ada'})</code></td><td>Sets several slots; the rest keep their values.</td></tr>
+                <tr><td><code>go(state, false, true)</code></td><td>2nd argument <code>false</code>: replace the whole state; 3rd <code>true</code>: replace the history entry.</td></tr>
+                <tr><td><code>goBack()</code> · <code>goForward()</code> · <code>goTo(n)</code></td><td>History navigation.</td></tr>
+                <tr><td><code>state</code> · <code>path</code></td><td>Current slot values and path.</td></tr>
+                <tr><td><code>hashBased</code> · <code>isConfigured</code></td><td>Hash or path mode · whether a route template was given.</td></tr>
+                <tr><td><code>onBeforeStateChange(cb)</code></td><td><code>cb(prevent, oldState, newState)</code> — call <code>prevent()</code> to cancel.</td></tr>
+                <tr><td><code>onAfterStateChange(cb)</code></td><td><code>cb(oldState, newState)</code>. Both return an unsubscribe function.</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p>
+        In <code>nb-event</code> handlers the router is simply <code>router</code>. Anywhere else, inject it: <code>constructor(public router: Router)</code>.
+    </p>
+    <code-view nb-in:name="@routing/guard.ts"></code-view>
+    <doc-note>
+        <p nb-projection>Router methods <strong>throw</strong> when no route template was given — the only part of nuBond that does not just log.
+        Check <code>router.isConfigured</code> when routing is optional.</p>
+    </doc-note>
+</article>

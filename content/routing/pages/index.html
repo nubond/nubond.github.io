@@ -1,0 +1,9 @@
+<nav>
+    <a href="#/home">Home</a>
+    <button nb-event:click="router.go({ page: 'profile', user: 'ada' })">Ada</button>
+    <button nb-event:click="router.go({ page: 'profile', user: 'alan' })">Alan</button>
+    <button nb-event:click="router.goBack()">Back</button>
+    <small>URL: #{{ this.router.path }}</small>
+</nav>
+
+<main nb-container="%page" nb-in:user="this.router.state.user"></main>

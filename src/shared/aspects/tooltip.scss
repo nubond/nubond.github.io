@@ -1,0 +1,29 @@
+// zero specificity: an element that positions itself (absolute, sticky…) keeps its position
+:where([data-tooltip]) {
+    position: relative;
+}
+
+[data-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    z-index: 10;
+    padding: 3px 8px;
+    border-radius: 5px;
+    background: var(--tooltip-bg);
+    color: var(--tooltip-fg);
+    font: 500 12px/1.4 var(--font-sans);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateY(-2px);
+    transition: opacity .12s, transform .12s;
+}
+
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::after {
+    opacity: 1;
+    transform: none;
+    transition-delay: .35s;
+}

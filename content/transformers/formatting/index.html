@@ -1,0 +1,5 @@
+<p>{{ plural(this.prices.length, 'item') }} for {{ currency(this.total) }}
+   ({{ currency(this.total, 'EUR') }})</p>
+
+<button nb-event:click="this.prices.push(9.99)">Add an item</button>
+<button nb-event:click="this.prices = []">Clear</button>

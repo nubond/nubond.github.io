@@ -1,0 +1,11 @@
+<button nb-event:click="this.count++">Clicked {{ this.count }} times</button>
+
+<!-- # : the handler runs once, then unsubscribes -->
+<button nb-event:click="#this.used = true">Works once</button>
+<span nb-if="this.used">✓ used</span>
+
+<!-- :400 debounces: the handler runs 400 ms after the last input -->
+<p>
+    <input placeholder="Type fast…" nb-event:input:400="this.query = nativeElement.value">
+    Debounced: <b>{{ this.query }}</b>
+</p>

@@ -1,0 +1,12 @@
+<style>
+    /* page styles do not reach into a component: only the page's own <p> gets the outline */
+    p { outline: 2px dashed tomato; }
+</style>
+
+<p class="box">A page paragraph with class="box" — outlined, but not boxed</p>
+
+<info-box nb-in:text="@Scoped styles + the shared sheet"></info-box>
+<info-box kind="warn" nb-in:text="@:host([kind=warn]) styles the host"></info-box>
+
+<!-- custom properties do cross the boundary -->
+<info-box style="--box-color: rebeccapurple" nb-in:text="@Themed with --box-color"></info-box>

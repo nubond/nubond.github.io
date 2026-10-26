@@ -1,0 +1,13 @@
+<!-- {{ }} mixes literal and bound text -->
+<p>Hi {{ this.user.first }} {{ this.user.last }}, you have {{ this.unread }} messages.</p>
+
+<!-- the same as {{ }}, written as an attribute -->
+<p nb-value="this.user.first.toUpperCase()"></p>
+
+<!-- objects become JSON; null and undefined become '' -->
+<p><code>{{ this.user }}</code> · [{{ this.missing }}]</p>
+
+<!-- nb-html writes innerHTML -->
+<p nb-html="this.rich"></p>
+<input size="40" value="Some <b>bold</b> and <i>italic</i> text"
+       nb-event:input="this.rich = nativeElement.value">

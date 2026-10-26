@@ -1,0 +1,34 @@
+<article class="doc">
+    <h1>Lists</h1>
+    <p class="lead"><code>nb-repeat="collection"</code> repeats the element once per item. Inside, <code>item</code>, <code>index</code> and <code>count</code> describe the current row.</p>
+
+    <live-example nb-in:name="@lists/todos"></live-example>
+    <p>
+        The collection is read live, so <code>push</code> and <code>splice</code> show up on the next pass. Put <code>nb-if</code> on the
+        repeated element to filter rows: <code>&lt;li nb-repeat="this.todos" nb-if="!item.done"&gt;</code>.
+    </p>
+
+    <h2>Nesting and other collections</h2>
+    <p>
+        Name a repeat to reach its variables from an inner one: <code>nb-repeat:group</code> provides <code>groupItem</code>,
+        <code>groupIndex</code> and <code>groupCount</code>. Keep the name one lowercase word — it is not converted.
+    </p>
+    <live-example nb-in:name="@lists/data-types"></live-example>
+    <div class="table">
+        <table>
+            <thead><tr><th>Collection</th><th><code>item</code> is</th></tr></thead>
+            <tbody>
+                <tr><td>Array, typed array, <code>Set</code>, string</td><td>the element / character</td></tr>
+                <tr><td><code>Map</code></td><td>a <code>[key, value]</code> pair</td></tr>
+                <tr><td>Object</td><td>each property value (prefer arrays — they are faster)</td></tr>
+                <tr><td>Number <code>N</code></td><td><code>1 … N</code></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <doc-note nb-in:kind="@warn">
+        <p nb-projection>Rows are reused by position, not by identity: row 3 always shows item 3. After sorting or removing,
+        DOM state such as focus or an input's typed text stays with the position. For the same reason, avoid <code>#</code>
+        bindings inside a list that changes.</p>
+    </doc-note>
+</article>

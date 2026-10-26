@@ -1,0 +1,24 @@
+<article class="doc">
+    <h1>Classes &amp; styles</h1>
+    <p class="lead"><code>nb-class</code> adds and removes CSS classes, <code>nb-style</code> sets inline styles.</p>
+
+    <live-example nb-in:name="@classes-and-styles/bindings"></live-example>
+
+    <div class="table">
+        <table>
+            <thead><tr><th>Form</th><th>Example</th></tr></thead>
+            <tbody>
+                <tr><td>Object</td><td><code>nb-class="{active: this.on; 'is-big': this.big}"</code></td></tr>
+                <tr><td>String</td><td><code>nb-class="this.theme"</code></td></tr>
+                <tr><td>Array</td><td><code>nb-class="[this.size; this.theme]"</code></td></tr>
+                <tr><td>Styles</td><td><code>nb-style="color: this.color; width: this.w + 'px'"</code></td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ul>
+        <li>Entries are separated with <code>;</code> (write <code>\;</code> for a literal one). A comma is <em>not</em> a separator here.</li>
+        <li>A style value ending in <code>!important</code> is applied as important; <code>null</code> or <code>undefined</code> removes the property.</li>
+        <li>Classes written in the markup (<code>class="card"</code>) are never removed by <code>nb-class</code> — leave a class out of the markup if a binding should switch it off.</li>
+    </ul>
+</article>

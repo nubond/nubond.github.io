@@ -1,0 +1,9 @@
+<p>Re-evaluated every pass: <b>{{ this.time }}</b></p>
+<p>One-time (#): <b>{{ #this.time }}</b></p>
+<p>Constant (@): <b nb-value="@Just a string, never evaluated"></b></p>
+
+<!-- several statements: separate them with commas, never with ; -->
+<button nb-event:click="this.clicks++, this.log.unshift(`pass ${this.clicks} at ${this.time}`)">
+    Run a pass
+</button>
+<p nb-repeat="this.log.slice(0, 3)"><small>{{ item }}</small></p>

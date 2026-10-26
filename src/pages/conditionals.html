@@ -1,0 +1,19 @@
+<article class="doc">
+    <h1>Conditionals</h1>
+    <p class="lead"><code>nb-if</code> shows an element while its expression is truthy. <code>nb-switch</code> shows the one <code>nb-case</code> that matches.</p>
+
+    <live-example nb-in:name="@conditionals/if-and-switch"></live-example>
+
+    <ul>
+        <li>Hidden elements stay in the DOM with an <code>nb-hidden</code> class (<code>display: none</code>). Their children are not evaluated, so hidden markup costs almost nothing.</li>
+        <li>A container or component on a hidden element is created only when it is first shown, and is kept when hidden again.</li>
+        <li><code>nb-default</code> takes no value and shows when no case matches.</li>
+    </ul>
+
+    <h2>Matching is type-strict</h2>
+    <p>
+        Cases compare with <code>===</code>. <code>@5</code> is the number 5, so it does not match the string <code>'5'</code> —
+        values from the router, inputs and URLs are strings. Objects and arrays are compared by their JSON.
+    </p>
+    <live-example nb-in:name="@conditionals/strict-matching"></live-example>
+</article>

@@ -1,0 +1,31 @@
+<article class="doc">
+    <h1>Expressions</h1>
+    <p class="lead">Every <code>nb-*</code> value is a JavaScript expression evaluated against your class. A prefix changes how often it runs.</p>
+
+    <live-example nb-in:name="@expressions/prefixes"></live-example>
+
+    <div class="table">
+        <table>
+            <thead><tr><th>Prefix</th><th>Meaning</th></tr></thead>
+            <tbody>
+                <tr><td><em>none</em></td><td>Re-evaluated on every change-detection pass.</td></tr>
+                <tr><td><code>#</code></td><td>One-time: evaluated until the first result that is not <code>undefined</code>, then frozen.</td></tr>
+                <tr><td><code>@</code></td><td>A constant, never evaluated: <code>@true</code> is a boolean, <code>@5</code> a number, anything else a string (<code>@Save</code> → <code>"Save"</code>).</td></tr>
+                <tr><td><code>%</code></td><td>A route slot — only in <code>nb-container</code>, see <a href="#/routing">Routing</a>.</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h2>Rules</h2>
+    <ul>
+        <li>Reach your class through <code>this</code>: <code>this.name</code>, <code>this.save()</code>.</li>
+        <li>Anything JavaScript allows works: template literals, ternaries, arrow functions, method calls.</li>
+        <li>Separate statements with a comma: <code>this.a = 1, this.b = 2</code>. A <code>;</code> breaks the expression.</li>
+        <li>Expressions are strings, so the compiler cannot check them. A failing expression is logged to the console, not thrown.</li>
+    </ul>
+
+    <doc-note nb-in:kind="@tip">
+        <p nb-projection>Use <code>#</code> for anything that never changes after it is first known — labels, translations,
+        constants built in the constructor. Fewer live expressions make every pass cheaper.</p>
+    </doc-note>
+</article>

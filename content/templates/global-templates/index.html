@@ -1,0 +1,7 @@
+<style>.tag { color: #3fc495; }</style>
+
+<!-- a template binds in the scope it is placed in: here, a repeat row -->
+<p nb-repeat="this.products">
+    {{ item.name }} <span nb-template="@price-tag"></span>
+    <span nb-if="item.sale" nb-template="@sale"></span>
+</p>

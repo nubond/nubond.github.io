@@ -1,0 +1,28 @@
+<article class="doc">
+    <h1>Components</h1>
+    <p class="lead">A component is a real custom element: a class, a template and CSS, isolated in Shadow DOM. Use components for reusable widgets.</p>
+
+    <live-example nb-in:name="@components/rating" nb-in:open="@star-rating.ts"></live-example>
+
+    <h2>The rules</h2>
+    <ul>
+        <li>The tag is the kebab-cased class name: <code>StarRating</code> → <code>&lt;star-rating&gt;</code>. It must contain a hyphen; give single-word classes a name: <code>@Component(['my-button', html], css)</code>.</li>
+        <li>In the example, <code>nb-in:value</code> and <code>nb-in:max</code> are inputs and the <code>rate</code> event an output — exactly as for containers, see below.</li>
+        <li>The component's CSS applies only inside it, and page CSS does not get in. Style the element itself with <code>:host</code>.</li>
+        <li>The Shadow DOM is <code>closed</code> by default: code outside cannot reach in, so inputs and outputs are the way to talk to a component.</li>
+        <li>Components come alive only inside a nuBond template — <code>document.createElement('star-rating')</code> stays an empty element.</li>
+    </ul>
+
+    <div nb-template="@registration"></div>
+
+    <div nb-template="@inputs-outputs"></div>
+
+    <h2>The element itself</h2>
+    <p>
+        Pass a class extending <code>HTMLElement</code> and the component's element is built from it — the place for
+        <code>observedAttributes</code>, form association or other native behavior. Inject it to reach the element from the context.
+        A config object sets the shadow root for this component only, replacing the app-wide default
+        (<a href="#/configuration"><code>$GlobalShadowRootConfig</code></a>).
+    </p>
+    <code-view nb-in:name="@components/element.ts"></code-view>
+</article>

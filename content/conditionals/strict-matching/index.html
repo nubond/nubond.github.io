@@ -1,0 +1,14 @@
+<button nb-event:click="this.value = 5">number 5</button>
+<button nb-event:click="this.value = '5'">string '5'</button>
+
+<div nb-switch="this.value">
+    <p nb-case="@5">Matched the number 5 (@5 is a number)</p>
+    <p nb-case="'5'">Matched the string '5'</p>
+</div>
+
+<!-- if / else: switch on a real boolean; !! turns undefined, 0 or '' into false -->
+<button nb-event:click="this.started = !this.started">Toggle</button>
+<div nb-switch="!!this.started">
+    <p nb-case="@true">Started</p>
+    <p nb-case="@false">Stopped</p>
+</div>

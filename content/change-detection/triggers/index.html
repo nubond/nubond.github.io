@@ -1,0 +1,6 @@
+<p>ticks: <b>{{ this.ticks }}</b> · stamp: <b>{{ this.stamp }}</b></p>
+
+<button nb-event:click="0">nb-event</button>
+<button nb-event:click="this.detectLater()">detect() in 1 s</button>
+<button nb-event:click="this.assignLater()">@Detector write in 1 s</button>
+<button nb-event:click="this.load()">async handler</button>

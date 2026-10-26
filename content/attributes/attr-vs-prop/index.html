@@ -1,0 +1,18 @@
+<label><input type="checkbox" nb-event:change="this.locked = nativeElement.checked"> lock the form</label>
+
+<p>
+    <!-- nb-attr: '' sets the attribute, null removes it -->
+    <input placeholder="Your name" nb-attr:disabled="this.locked ? '' : null"
+           nb-event:input="this.name = nativeElement.value">
+
+    <!-- nb-prop: the DOM property gets the raw value -->
+    <button nb-prop:disabled="this.locked || !this.name">Save</button>
+</p>
+
+<p>
+    <progress max="10" nb-attr:value="this.name.length"></progress>
+    <a nb-attr:href="'https://www.npmjs.com/search?q=' + encodeURIComponent(this.name)" target="_blank">Search npm for “{{ this.name }}”</a>
+</p>
+
+<!-- the classic trap: this writes disabled="false" — still disabled -->
+<button nb-attr:disabled="this.locked">Never clickable</button>

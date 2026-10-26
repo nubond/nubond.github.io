@@ -1,0 +1,63 @@
+<article class="doc">
+    <h1>Change detection</h1>
+    <p class="lead">
+        nuBond updates the DOM in a <em>pass</em>: it re-evaluates the bindings of a template and writes what changed.
+        A pass runs only when something triggers it.
+    </p>
+
+    <live-example nb-in:name="@change-detection/triggers" nb-in:open="@index.ts"></live-example>
+    <p>
+        A timer increments <code>ticks</code> ten times a second, yet the number only moves when a pass runs. Every button
+        is an <code>nb-event</code>, so a click renders once; then watch what happens one second later.
+    </p>
+
+    <div class="table">
+        <table>
+            <thead><tr><th>Triggers a pass</th><th>Does not</th></tr></thead>
+            <tbody>
+                <tr>
+                    <td>an <code>nb-event</code> handler (when a returned Promise settles, if it returns one)<br>
+                        assigning a new value to a <code>@Detector()</code> property<br>
+                        <code>ChangeDetector.detect()</code><br>
+                        a changed <code>nb-in</code> input · a route change<br>
+                        <code>ElementManipulations</code> changes</td>
+                    <td>timers, <code>fetch().then(…)</code><br>
+                        listeners added in code, third-party callbacks<br>
+                        in-place edits such as <code>this.user.name = 'x'</code> on a <code>@Detector()</code><br>
+                        <code>ElementSubscriptions</code> callbacks</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <ul>
+        <li>A pass covers <strong>one</strong> template. A child re-renders when its inputs change; siblings and parents are not touched.</li>
+        <li>Passes are asynchronous and batched: ten triggers in one task produce one pass. Do not read the DOM right after changing state.</li>
+        <li><code>@Detector()</code> compares deeply: assign a new object (<code>this.cfg = {...this.cfg, x: 2}</code>), do not mutate it.</li>
+        <li>A container or component hidden by <code>nb-if</code> / <code>nb-switch</code> is paused; a <code>detect()</code> requested meanwhile runs once it is shown again.</li>
+        <li>An app root whose element is removed from the page is disposed on its next change-detection request.</li>
+    </ul>
+
+    <h2>Telling the parent: <code>@Eventer()</code></h2>
+    <p>
+        Assigning an <code>@Eventer()</code> property dispatches a custom event named after it (<code>seconds</code>; <code>selectedItem</code> → <code>selected-item</code>)
+        with the value as <code>data</code>. <code>@Eventer('tick')</code> picks the name. A value deeply equal to the previous one is not
+        dispatched again, and an initial value is announced once after the first pass.
+    </p>
+    <live-example nb-in:name="@change-detection/eventer" nb-in:open="@stop-watch.ts"></live-example>
+    <doc-note>
+        <p nb-projection><code>@Detector()</code> and <code>@Eventer()</code> work on plain fields declared in the class itself — not on
+        <code>get</code>/<code>set</code> accessors and not on fields inherited from a base class.</p>
+    </doc-note>
+
+    <h2>Strategies</h2>
+    <p>
+        <strong>Optimistic</strong> (default) runs one pass per trigger. <strong>Pessimistic</strong> repeats the pass while
+        bindings keep changing (up to 10 times) — for templates whose bindings feed each other.
+    </p>
+    <code-view nb-in:name="@change-detection/strategies.ts"></code-view>
+    <doc-note nb-in:kind="@warn">
+        <p nb-projection>Never assign a <code>@Detector()</code> property from a template expression: every write schedules another pass.
+        After about 20 the detector is disabled for good, with an error in the console.</p>
+    </doc-note>
+</article>

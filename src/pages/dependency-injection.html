@@ -1,0 +1,40 @@
+<article class="doc">
+    <h1>Dependency injection</h1>
+    <p class="lead">Ask for a service in the constructor — nuBond creates it and passes it in, looked up by the parameter's class.</p>
+
+    <live-example nb-in:name="@dependency-injection/shared-service" nb-in:open="@cart.ts"></live-example>
+    <p>
+        Both components receive the same <code>Cart</code> because it is a singleton. Adding an item runs a pass in
+        <code>&lt;product-list&gt;</code> only, so <code>&lt;cart-badge&gt;</code> listens to the service and calls
+        <code>detect()</code> itself — the usual pattern for shared state.
+    </p>
+
+    <h2>Registering services</h2>
+    <code-view nb-in:name="@dependency-injection/registration.ts"></code-view>
+
+    <p>Your own services resolve everywhere, transformers included. Dependencies are resolved recursively; a circular reference is reported in the console.</p>
+
+    <h2>Built-in services</h2>
+    <div class="table">
+        <table>
+            <thead><tr><th>Service</th><th>What for</th><th>Available in</th></tr></thead>
+            <tbody>
+                <tr><td><code>ChangeDetector</code></td><td><code>detect()</code> — request a pass</td><td>everything with a template, and aspects</td></tr>
+                <tr><td><code>EventDispatcher</code></td><td><code>dispatch(name, data)</code> — tell the parent; <code>dispatch(event)</code> sends an <code>Event</code> you built (e.g. one that bubbles). Returns <code>false</code> if a handler called <code>preventDefault()</code> on a cancelable event.</td><td>everything with a template, and aspects</td></tr>
+                <tr><td><code>Router</code></td><td>navigation and route state</td><td>everywhere</td></tr>
+                <tr><td><code>ElementManipulations</code></td><td>attributes, classes, styles, properties of the host element</td><td>components, aspects</td></tr>
+                <tr><td><code>ElementSubscriptions</code></td><td><code>subscribe(event, callback, options?, debounce?)</code> on the host — returns an unsubscribe function, triggers no pass</td><td>components, aspects</td></tr>
+                <tr><td>the host element</td><td>type the parameter as <code>HTMLElement</code></td><td>components, aspects</td></tr>
+            </tbody>
+        </table>
+    </div>
+
+    <doc-note nb-in:kind="@warn">
+        <div nb-projection>
+            <p>Type parameters with a <strong>class</strong>. An interface, <code>any</code> or a union type compiles to <code>Object</code>
+            and is not injected (<code>Injection 'Object' cannot be resolve.</code>).</p>
+            <p>Give every decorated class its own constructor — an inherited one receives no injections. Services
+            (<code>@Injectable</code>) cannot receive <code>ChangeDetector</code> and friends: those belong to a template.</p>
+        </div>
+    </doc-note>
+</article>

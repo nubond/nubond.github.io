@@ -1,0 +1,24 @@
+<article class="doc">
+    <h1>Containers</h1>
+    <p class="lead">A container is a class with its own template, rendered inside an element with <code>nb-container</code>. Use containers for pages and sections.</p>
+
+    <live-example nb-in:name="@containers/counter" nb-in:open="@counter.ts"></live-example>
+
+    <h2>How it fits together</h2>
+    <ul>
+        <li><code>@Container(html)</code> registers the class; <code>nb-container="@Counter"</code> renders it (names are case-insensitive).</li>
+        <li>In the example, <code>nb-in:start</code> is an input and the <code>reached</code> event an output — see below.</li>
+        <li>A container has no Shadow DOM: page CSS applies to it.</li>
+    </ul>
+
+    <div nb-template="@registration"></div>
+
+    <div nb-template="@inputs-outputs"></div>
+
+    <h2>Where a template can come from</h2>
+    <code-view nb-in:name="@containers/sources.ts"></code-view>
+    <p>
+        The same forms work for component templates and styles, aspect styles, <code>$Template</code> and <code>$AdoptedStyle</code>.
+        A string is fetched only when it starts with <code>/</code> and is a single line without <code>&lt;</code> or <code>&#123;</code>.
+    </p>
+</article>

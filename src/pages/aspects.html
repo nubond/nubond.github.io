@@ -1,0 +1,18 @@
+<article class="doc">
+    <h1>Aspects</h1>
+    <p class="lead">An aspect adds behavior to an existing element — any element, with no new template and no new scope. Attach one with <code>nb-aspect:name="value"</code>.</p>
+
+    <live-example nb-in:name="@aspects/badge-and-spotlight" nb-in:open="@badge.ts"></live-example>
+
+    <ul>
+        <li>The name is the kebab-cased class name: <code>Badge</code> → <code>nb-aspect:badge</code>.</li>
+        <li>The bound value arrives in the <code>data</code> setter whenever it changes. Always add a <code>data</code> getter — nuBond compares against it, and without one the setter runs on every pass.</li>
+        <li>An aspect can inject the host element, <code>ElementManipulations</code>, <code>ElementSubscriptions</code>, <code>ChangeDetector</code> and <code>EventDispatcher</code>.</li>
+        <li>Its CSS (the first decorator argument) is added to the document, or to the shadow root the element lives in.</li>
+        <li>Aspects are created even on hidden elements.</li>
+    </ul>
+    <doc-note nb-in:kind="@tip">
+        <p nb-projection><code>Spotlight</code> shows how to handle constant events: <code>ElementSubscriptions</code> is a plain listener that never
+        triggers a pass. Update visuals directly, and call <code>detect()</code> only when something worth rendering settles.</p>
+    </doc-note>
+</article>

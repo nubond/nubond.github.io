@@ -1,0 +1,8 @@
+<!-- StarRating → <star-rating> -->
+<star-rating nb-in:value="this.rating" nb-in:max="@5" nb-event:rate="this.rating = data"></star-rating>
+
+<p>The parent knows: {{ this.rating }} / 5</p>
+<button nb-event:click="this.rating = 0">Clear from the parent</button>
+
+<!-- the component's CSS does not leak out: this button stays plain -->
+<button class="on">★ not styled</button>

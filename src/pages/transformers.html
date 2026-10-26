@@ -1,0 +1,18 @@
+<article class="doc">
+    <h1>Transformers</h1>
+    <p class="lead">A transformer is a global function for templates: formatting, translation, small calculations.</p>
+
+    <live-example nb-in:name="@transformers/formatting" nb-in:open="@transformers.ts"></live-example>
+
+    <ul>
+        <li>The function name is the class name with a lowercase first letter: <code>Currency</code> → <code>currency(…)</code>. Or name it: <code>@Transformer('money')</code>.</li>
+        <li>Every argument of the call is passed to <code>transform()</code>.</li>
+        <li>One instance serves the whole app, and it can inject services — e.g. a localization service for <code>t('save')</code>.</li>
+        <li>Errors in <code>transform()</code> are logged and the call returns <code>undefined</code>.</li>
+        <li>Names are case-insensitive and unique, and cannot be one of the built-in names (<code>item</code>, <code>index</code>, <code>count</code>, <code>event</code>, <code>data</code>, <code>element</code>, <code>nativeElement</code>, <code>unSubscribe</code>, <code>router</code>).</li>
+        <li>An <code>nb-var</code> name or a repeat prefix that collides with a transformer name is rejected with an error.</li>
+    </ul>
+    <doc-note nb-in:kind="@tip">
+        <p nb-projection>For text that never changes, freeze it: <code>&#123;&#123; #t('title') &#125;&#125;</code> runs the transformer once instead of on every pass.</p>
+    </doc-note>
+</article>

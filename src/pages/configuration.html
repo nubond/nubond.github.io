@@ -1,0 +1,54 @@
+<article class="doc">
+    <h1>Configuration &amp; security</h1>
+    <p class="lead">Global options go into <code>@AppRoot</code> as an object. Here: W3C-valid attributes and an HTML sanitizer.</p>
+
+    <live-example nb-in:name="@configuration/w3c-and-sanitizer" nb-in:open="@index.ts"></live-example>
+
+    <code-view nb-in:name="@configuration/config.ts"></code-view>
+    <ul>
+        <li>Unknown keys or wrong types make the whole object unrecognized, and it is ignored without a message.</li>
+        <li>The configuration cannot change once the first app root is bound.</li>
+        <li><code>@AppRoot</code> arguments are recognized by type, like every decorator's. Unlike the others, it <strong>throws</strong> when given two selectors, two route templates or two configs.</li>
+        <li>W3C mode: <code>nb-x</code> becomes <code>data-nb-x</code> and <code>:</code> becomes <code>--</code>.</li>
+        <li><code>&#123;&#123; &#125;&#125;</code> is compiled at build time and still emits <code>nb-value</code>, which W3C mode ignores. Add
+            <code>"nubond": &#123; "compliantWithW3CInterpolation": true &#125;</code> to <code>package.json</code> and it emits <code>data-nb-value</code>.</li>
+    </ul>
+
+    <h2>Shadow roots for all components: <code>$GlobalShadowRootConfig</code></h2>
+    <p>
+        The default shadow root is not part of the global config — a <code>shadowRootConfig</code> key there makes the
+        whole object unrecognized. Each component reads the default when its module is imported, before any code in
+        <code>index.ts</code> runs, so set it in a module imported first:
+    </p>
+    <code-view nb-in:name="@configuration/config-first.ts"></code-view>
+    <ul>
+        <li>A later call reaches only components imported after it, without a message. The last call wins.</li>
+        <li>A component's own <code>shadowRootConfig</code> replaces the default as a whole — fields are not merged.</li>
+    </ul>
+
+    <h2>What is sanitized</h2>
+    <div class="table">
+        <table>
+            <thead><tr><th>Content</th><th>Sanitized?</th></tr></thead>
+            <tbody>
+                <tr><td><code>nb-html</code> values</td><td>Yes, when an <code>htmlSanitizer</code> is configured — otherwise written as is.</td></tr>
+                <tr><td>Templates and styles from a URL or a provider</td><td>Yes, with the configured sanitizer.</td></tr>
+                <tr><td>Inline templates and styles (incl. imported files)</td><td>No — they are your source code.</td></tr>
+                <tr><td><code>nb-attr</code> / <code>nb-prop</code> values</td><td>Never — check <code>href</code>, <code>src</code>, <code>srcdoc</code> yourself.</td></tr>
+            </tbody>
+        </table>
+    </div>
+    <p>
+        The most specific sanitizer wins: a component or container config (<code>@Component(html, css, &#123; htmlSanitizer, styleSanitizer &#125;)</code>),
+        the last argument of <code>$Template(name, html, sanitizer)</code>, <code>$AdoptedStyle(name, css, sanitizer)</code> and
+        <code>@Aspect(css, sanitizer)</code>, then the global config.
+    </p>
+
+    <h2>Several apps on one page</h2>
+    <p>
+        <code>@AppRoot('#widget')</code> binds to a selector (or an <code>Element</code>) instead of <code>&lt;body&gt;</code>, so nuBond can
+        live next to another framework and take over a page piece by piece. The element must already be in the page; a root
+        whose element is later removed is disposed automatically. All roots share one registry and one configuration — set it
+        with <code>$Config</code> and <code>$Route</code> before the first root.
+    </p>
+</article>

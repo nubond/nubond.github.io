@@ -1,0 +1,16 @@
+:host {
+    display: inline-flex;
+}
+
+button {
+    padding: 0 2px;
+    border: 0;
+    background: none;
+    color: #8888;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+button.on {
+    color: gold;
+}
