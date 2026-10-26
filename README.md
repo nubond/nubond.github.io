@@ -1,8 +1,13 @@
-# @nubond/docs
+<h1 align="center">The interactive <a href="https://github.com/nubond/nubond">nuBond</a> documentation</h1>
 
-The interactive nuBond documentation: short lessons with live, editable examples. Built with nuBond itself.
+<p align="center">
+  <strong>Short lessons with live, editable examples. 15 minutes and you know all the basics, 15 minutes more and you know everything. Built with nuBond itself.</strong>
+</p>
 
-> 15 minutes and you know all the basics, 15 minutes more and you know everything.
+<p align="center">
+  <a href="LICENSE"><img alt="license" src="https://img.shields.io/npm/l/nubond.svg"></a>
+  <img alt="Made in Ukraine" src="https://img.shields.io/badge/Made_in-Ukraine-FFD800.svg?labelColor=0056B9">
+</p>
 
 ## Quick start
 
