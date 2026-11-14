@@ -15,7 +15,7 @@
                 <tr><td><code>nb-case</code> never matches</td><td>Type mismatch: <code>@5</code> is a number, route and input values are strings — write <code>nb-case="'5'"</code>.</td></tr>
                 <tr><td>An <code>nb-in</code> value arrives as <code>undefined</code></td><td>It cannot be cloned (a function, a DOM node). Use <code>nb-in-ref</code>.</td></tr>
                 <tr><td>A child's DOM is stale after an edit</td><td>With <code>nb-in-ref</code> an in-place change is invisible. Assign a new object.</td></tr>
-                <tr><td>A parent never hears an event</td><td>Custom events do not bubble, and HTML lowercases names: dispatch <code>item-selected</code>, not <code>itemSelected</code>.</td></tr>
+                <tr><td>A parent never hears an event</td><td>Custom events do not bubble: only the direct parent hears them. Names are lowercase — <code>dispatch</code> lowercases them to match <code>nb-event:</code>, but a plain <code>addEventListener('itemSelected')</code> never fires; listen for <code>itemselected</code> or use kebab-case.</td></tr>
                 <tr><td>A service arrives as <code>undefined</code></td><td>The parameter is typed with an interface, <code>any</code> or a union. Use a class.</td></tr>
                 <tr><td>Wrong row state after sorting</td><td><code>nb-repeat</code> reuses rows by position. Keep per-row state in the data, not in the DOM.</td></tr>
                 <tr><td>Projected markup sees the wrong <code>this</code></td><td>Projected content binds in the receiving template. Pass data with <code>nb-in</code>.</td></tr>

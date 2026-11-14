@@ -10,7 +10,7 @@
             <tbody>
                 <tr><td><em>none</em></td><td>Re-evaluated on every change-detection pass.</td></tr>
                 <tr><td><code>#</code></td><td>One-time: evaluated until the first result that is not <code>undefined</code>, then frozen.</td></tr>
-                <tr><td><code>@</code></td><td>A constant, never evaluated: <code>@true</code> is a boolean, <code>@5</code> a number, anything else a string (<code>@Save</code> → <code>"Save"</code>).</td></tr>
+                <tr><td><code>@</code></td><td>A constant, never evaluated: <code>@true</code> is a boolean, <code>@null</code> / <code>@undefined</code> are <code>null</code> / <code>undefined</code>, <code>@5</code> a number, anything else a string (<code>@Save</code> → <code>"Save"</code>).</td></tr>
                 <tr><td><code>%</code></td><td>A route slot — only in <code>nb-container</code>, see <a href="#/routing">Routing</a>.</td></tr>
             </tbody>
         </table>

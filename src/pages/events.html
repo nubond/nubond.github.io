@@ -18,7 +18,7 @@
             <thead><tr><th>Name</th><th>Value</th></tr></thead>
             <tbody>
                 <tr><td><code>event</code></td><td>The DOM event.</td></tr>
-                <tr><td><code>data</code></td><td><code>event.detail</code> — the payload of a custom event.</td></tr>
+                <tr><td><code>data</code></td><td><code>event.detail</code> — the payload of a custom event; <code>null</code> when dispatched without data.</td></tr>
                 <tr><td><code>nativeElement</code></td><td>The DOM element.</td></tr>
                 <tr><td><code>element</code></td><td>Helpers for that element: <code>styles</code>, <code>classes</code>, <code>attributes</code>, <code>properties</code>.</td></tr>
                 <tr><td><code>unSubscribe</code></td><td>A function that stops this handler.</td></tr>

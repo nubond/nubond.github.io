@@ -9,7 +9,7 @@
         <li>The bound value arrives in the <code>data</code> setter whenever it changes. Always add a <code>data</code> getter — nuBond compares against it, and without one the setter runs on every pass.</li>
         <li>An aspect can inject the host element, <code>ElementManipulations</code>, <code>ElementSubscriptions</code>, <code>ChangeDetector</code> and <code>EventDispatcher</code>.</li>
         <li>Its CSS (the first decorator argument) is added to the document, or to the shadow root the element lives in.</li>
-        <li>Aspects are created even on hidden elements.</li>
+        <li>Aspects are created even on hidden elements. Release timers or global listeners in an optional <code>onDispose()</code> — it runs when the element is disposed.</li>
     </ul>
     <doc-note nb-in:kind="@tip">
         <p nb-projection><code>Spotlight</code> shows how to handle constant events: <code>ElementSubscriptions</code> is a plain listener that never

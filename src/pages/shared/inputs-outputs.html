@@ -17,5 +17,5 @@
     <li><code>nb-in</code> copies with <code>structuredClone</code>: the child cannot touch the parent's data, and in-place edits in the parent still arrive.
         Functions, class instances, DOM nodes and anything else that cannot be cloned need <code>nb-in-ref</code> — where only assigning a new object updates the child.</li>
     <li>Treat inputs as read-only in the child; change the data in the parent.</li>
-    <li>Output events do not bubble: only the direct parent hears them — dispatch again to go further up. Use kebab-case event names, because HTML lowercases <code>nb-event:itemSaved</code>.</li>
+    <li>Output events do not bubble: only the direct parent hears them — dispatch again to go further up. Event names are lowercased on both sides (HTML lowercases <code>nb-event:itemSaved</code>, <code>dispatch</code> lowercases the name it sends), so kebab-case names read most honestly.</li>
 </ul>
