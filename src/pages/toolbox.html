@@ -28,7 +28,7 @@
         <li><strong><code>@nubond/posthtml-value-interpolation</code></strong> — the build step behind <code>&#123;&#123; &#125;&#125;</code>.
             For W3C mode, set <code>"nubond": &#123; "compliantWithW3CInterpolation": true &#125;</code> in <code>package.json</code>.</li>
         <li><strong>Parcel setup</strong> — any <code>.html</code> / <code>.scss</code> / <code>.css</code> file imports as a string, except the entry files
-            <code>index.*</code> and <code>app.*</code>, which Parcel bundles. Prefix a URL with <code>ref:</code> (<code>href="ref:npm:pkg/x.css"</code>) to link a file instead of inlining it.</li>
+            <code>index.*</code> and <code>app.*</code>, which Parcel bundles. Prefix a URL with <code>ref:</code> (<code>href="ref:~/node_modules/pkg/x.css"</code> — on Node 26 Parcel 2.16 rejects <code>ref:npm:pkg/…</code> for an unscoped package with <code>Invalid port in url</code>) to link a file instead of inlining it.</li>
         <li><strong>One file</strong> — nuBond has no runtime dependencies, so an app can be bundled into a single JavaScript file.</li>
         <li><strong>nuBond Language Service</strong> for VS Code — completion, hover, go to definition, rename and diagnostics inside templates. Enable it with <code>"nubond": &#123; "languageService": true &#125;</code> in <code>package.json</code>.</li>
     </ul>
